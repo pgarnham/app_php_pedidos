@@ -10,7 +10,7 @@ if (!isset($_SESSION['current_user_id'])) {
 
 <?php
     require("connection.php");
-    $consulta = "SELECT nombre FROM categorias";
+    $consulta = "SELECT nombre, cat_id FROM categorias";
     $result = $my_db -> prepare($consulta);
     $result -> execute();
     $categorias = $result -> fetchAll();
@@ -41,13 +41,16 @@ if (!isset($_SESSION['current_user_id'])) {
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 class="form-title">Categorías</h2>
-                        
+                        <div class="form-group form-button">
+                            <a href="new_category.php" class="form-submit" id="signup" role="button">Crear Categoría</a>
+                        </div>
                         <table class="table">
                             <thead>
                                 <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,8 +60,15 @@ if (!isset($_SESSION['current_user_id'])) {
                                     echo "<tr>
                                     <th scope='row'>$contador</th>
                                     <td>$cat[0]</td>
-                                    <td> <button href='#' type='button' class='btn btn-success'><i class='fas fa-edit'></i></button>
-                                    <button href='#' type='button' class='btn btn-danger'><i class='far fa-trash-alt'></i></button>
+                                    <td align='center'>
+                                        <form action='edit_category.php' method='post'>
+                                            <button name='category_id' type='submit' value='$cat[1]' class='btn btn-primary btn-sm'><i class='zmdi zmdi-edit material-icons-name'></i></button>
+                                        </form>
+                                    </td>
+                                    <td align='center'>
+                                        <form action='consultas/delete_category.php' method='post'>
+                                            <button name='category_id' type='submit' value='$cat[1]' class='btn btn-danger btn-sm'><i class='zmdi zmdi-delete material-icons-name'></i></button>
+                                        </form>
                                     </td>
                                     </tr>";
                                     $contador += 1;
@@ -66,10 +76,6 @@ if (!isset($_SESSION['current_user_id'])) {
                                 ?>
                             </tbody>
                         </table>
-
-                        <div class="form-group form-button">
-                            <a href="new_category.php" class="form-submit" id="signup" role="button">Crear Categoría</a>
-                        </div>
                     </div>
 
 
