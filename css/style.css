@@ -589,4 +589,9 @@ label.valid {
     margin-right: 0px;
     margin-bottom: 10px; } }
 
+  .tiptip {
+    display: none;
+    position: absolute;
+}
+
 /*# sourceMappingURL=style.css.map */

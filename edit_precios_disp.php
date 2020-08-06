@@ -25,7 +25,7 @@ if (!isset($_SESSION['current_user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Productos</title>
+    <title>Precios y Disponibilidad</title>
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
@@ -43,29 +43,24 @@ if (!isset($_SESSION['current_user_id'])) {
             <div class="container">
                 <div class="signup-content">
                     <div class="">
-                        <h2 class="form-title">Productos</h2>
+                        <h2 class="form-title">Precios y Disponibilidad</h2>
                         <!-- <div class="form-group form-button">
                             <a href="new_product.php" class="form-submit" id="signup" role="button">Agregar Producto</a>
                         </div>
                         <div class="form-group form-button">
                             <a href="precio_disponibilidad.php" class="form-submit" id="signup" role="button">Modificar Precios o Disponibilidad</a>
                         </div> -->
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" href="new_product.php"  type="button" class="btn btn-secondary">Agregar Producto</a>
-                            <a role="button" href="edit_precios_disp.php" type="button" class="btn btn-secondary">Editar Precios/Disponibilidad</a>
-                        </div>
-                        <br><br>
+                        <form action='consultas/edit_precio_disp_consulta.php' method='post'>
                         <table class="table">
                             <thead>
                                 <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Categoría</th>
-                                <th scope="col">Unidad</th>
-                                <th scope="col">Disponible</th>
-                                <th scope="col">Editar</th>
-                                <th scope="col">Eliminar</th>
+                                <th scope="col">Precio Actual</th>
+                                <th scope="col">Disp. Actual</th>
+                                <th scope="col">Nuevo Precio</th>
+                                <th scope="col">Nueva Disp.</th>
+                                <th scope="col">Guardar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,25 +68,36 @@ if (!isset($_SESSION['current_user_id'])) {
                                 $contador = 1;
                                  foreach($productos as $prod){
                                      $disp = "No";
+                                     $check = "";
+                                     
                                      if ($prod[4] == 1){
                                         $disp = "Si";
+                                        $check = "checked='checked'";
+                                        
                                      };
-                                    echo "<tr class='thumbnail-item'>
+                                     $name_ob = "disp" . $prod[5];
+                                    echo "
+                                    <tr class='thumbnail-item'>
                                     <th scope='row'>$contador</th>
-                                    <td>$prod[0] <div style='display:none' class='tiptip'><img src='$prod[6]' alt=''/></div></td>
+                                    <td>$prod[0]</td>
                                     <td>$prod[1]</td>
-                                    <td>$prod[2]</td>
-                                    <td>$prod[3]</td>
                                     <td>$disp</td>
-                                    <td align='center'>
-                                        <form action='edit_product.php' method='post'>
-                                            <button name='product_id' type='submit' value='$prod[5]' class='btn btn-primary btn-sm'><i class='zmdi zmdi-edit material-icons-name'></i></button>
-                                        </form>
+                                    <td>
+                                        <div class='input-group-prepend'>
+                                            <span class='input-group-text' id='basic-addon1'>\$ </span>
+                                            <input name='precio' id='precio' type='text' class='form-control' placeholder='nuevo precio' aria-describedby='basic-addon1'>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class='custom-control custom-checkbox'>
+                                            <input name='$name_ob' type='checkbox' class='custom-control-input' id='$prod[5]' value='si' $check>
+                                            <label class='custom-control-label' for='$prod[5]'>Disp.</label>
+                                        </div>
                                     </td>
                                     <td align='center'>
-                                        <form action='consultas/delete_product.php' method='post'>
-                                            <button name='product_id' type='submit' value='$prod[5]' class='btn btn-danger btn-sm'><i class='zmdi zmdi-delete material-icons-name'></i></button>
-                                        </form>
+                                        
+                                            <button name='product_id' type='submit' value='$prod[5]' class='btn btn-success btn-sm'><i class='zmdi zmdi-save material-icons-name'></i></button>
+                                        
                                     </td>
                                     </tr>";
                                     $contador += 1;
@@ -99,6 +105,7 @@ if (!isset($_SESSION['current_user_id'])) {
                                 ?>
                             </tbody>
                         </table>
+                        </form>
                     </div>
 
 

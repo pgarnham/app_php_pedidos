@@ -52,7 +52,7 @@ require("connection.php");
             <div class="container">
                 <div class="signin-content">
                     <div class="signin-image">
-                        <?php echo "<figure><img src='$producto[4]' alt='sign up image'></figure>"; ?>
+                        <figure><img src="img/sign-in image.png" alt="sing up image"></figure>
                     </div>
 
                     <div class="signin-form">
@@ -68,6 +68,13 @@ require("connection.php");
                                 ?>
                             </div>
                             <br>
+                            <div class="form-group">
+                                <label for="precio"><i class="zmdi zmdi-money-box material-icons-name"></i></label>
+                                <?php
+                                echo "<input value='$producto[3]' type='text' name='precio' id='precio'/>"; 
+                                ?>
+                            </div>
+
                             <div class="form-group">
                             <label for="sel1"><i class="zmdi zmdi-collection-item-1 material-icons-name"></i> Categoría</label>
                             <br><br><br>
@@ -104,10 +111,28 @@ require("connection.php");
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="foto"><i class="zmdi zmdi-image material-icons-name"></i></label>
+                            <label for="sel1"><i class="zmdi zmdi-shopping-basket material-icons-name"></i> Disponibilidad</label>
+                            <br><br><br>
+                            <select class="form-control" id="sel1" name="disponible">
                                 <?php
-                                echo "<input type='text' value='$producto[4]' name='foto' id='foto'/>";
+                                foreach(array(0, 1) as $disp){
+                                    if ($producto[5] == $disp){
+                                        $show = "No";
+                                        if ($disp == 1){
+                                            $show = "Si";
+                                        }
+                                        echo "<option selected='selected' value='$disp'>$show</option>";
+                                    }
+                                    else {
+                                        $show = "No";
+                                        if ($disp == 1){
+                                            $show = "Si";
+                                        }
+                                        echo "<option value='$disp'>$show</option>";
+                                    }
+                                };
                                 ?>
+                            </select>
                             </div>
                             <input type="hidden" name="product_id" value="<?php echo $producto[0]; ?>">
                             <div class="form-group form-button">

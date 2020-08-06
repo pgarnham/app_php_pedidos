@@ -43,7 +43,7 @@ require("connection.php");
             <div class="container">
                 <div class="signin-content">
                     <div class="signin-image">
-                        <figure><img src="img/sign-in image.png" alt="sing up image"></figure>
+                        <figure><img src="https://i.imgur.com/PvAZMcN.jpg" alt="sing up image"></figure>
                     </div>
 
                     <div class="signin-form">
@@ -53,14 +53,9 @@ require("connection.php");
                                 <label for="nombre"><i class="zmdi zmdi-cake material-icons-carrot"></i></label>
                                 <input type="text" name="nombre" id="nombre" placeholder="Nombre"/>
                             </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="precio"><i class="zmdi zmdi-money-box material-icons-name"></i></label>
-                                <input type="text" name="precio" id="precio" placeholder="Precio"/>
-                            </div>
 
                             <div class="form-group">
-                            <label for="sel1"><i class="zmdi zmdi-collection-item-1 material-icons-name"></i> Categoría</label>
+                            <label for="sel1"><i class="zmdi zmdi-collection-item-1 material-icons-carrot"></i> Categoría</label>
                             <br><br><br>
                             <select class="form-control" id="sel1" name="categoria">
                                 <?php
@@ -81,6 +76,11 @@ require("connection.php");
                                 };
                                 ?>
                             </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="imagen"><i class="zmdi zmdi-image material-icons-carrot"></i></label>
+                                <input type="text" name="imagen" id="imagen" placeholder="Imagen"/>
                             </div>
                 
                             <div class="form-group form-button">

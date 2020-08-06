@@ -4,13 +4,12 @@
 
  
   $var_name = $_POST["nombre"];
-  $var_prize = $_POST["precio"];
   $var_cat = $_POST["categoria"];
   $var_unit = $_POST["unidad"];
-  $var_disp = $_POST["disponible"];
+  $var_imagen = $_POST["foto"];
   $pid = $_POST["product_id"];
 
-  $editar = "UPDATE productos SET nombre = '$var_name', cat_id = $var_cat, precio = $var_prize, unit_id = $var_unit, disponible = $var_disp 
+  $editar = "UPDATE productos SET nombre = '$var_name', cat_id = $var_cat, unit_id = $var_unit, imagen = $var_imagen 
   WHERE productos.pid = $pid";
   
   echo "'$editar'";

@@ -31,7 +31,6 @@ session_start();
   $var_user_id = $dataCollected[0][2];
   $_SESSION['current_user_id'] = $var_user_id;
 
-
   if($var_user != $dataCollected[0][0] or !(password_verify($var_pass, $dataCollected[0][1])))
     {
       echo '<script>window.location = "../login.php" </script>'; 

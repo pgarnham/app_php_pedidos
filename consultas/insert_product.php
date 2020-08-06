@@ -4,15 +4,13 @@
 
  
   $var_name = $_POST["nombre"];
-  $var_prize = $_POST["precio"];
+  $var_imagen = $_POST["imagen"];
   $var_cat = $_POST["categoria"];
   $var_unit = $_POST["unidad"];
 
-  $crear = "INSERT INTO productos (nombre, cat_id, precio, unit_id, disponible) 
-  VALUES ('$var_name', $var_cat, $var_prize, $var_unit, 1)";
+  $crear = "INSERT INTO productos (nombre, cat_id, unit_id, imagen) 
+                    VALUES ('$var_name', $var_cat, $var_prize, $var_unit, $var_imagen)";
   
-  echo "'$crear'";
-
   $result = $my_db -> prepare($crear);
   $result -> execute();
 
