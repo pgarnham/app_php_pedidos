@@ -7,13 +7,12 @@
   $var_cat = $_POST["categoria"];
   $var_unit = $_POST["unidad"];
   $var_imagen = $_POST["foto"];
+  $var_esc = $_POST["escala"];
   $pid = $_POST["product_id"];
 
-  $editar = "UPDATE productos SET nombre = '$var_name', cat_id = $var_cat, unit_id = $var_unit, imagen = $var_imagen 
-  WHERE productos.pid = $pid";
-  
-  echo "'$editar'";
-
+  $editar = "UPDATE productos SET nombre = '$var_name', cat_id = $var_cat, unit_id = $var_unit, esc_id = $var_esc, imagen = '$var_imagen'
+                    WHERE productos.pid = $pid";
+  echo $editar;
   $result = $my_db -> prepare($editar);
   $result -> execute();
 

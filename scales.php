@@ -9,14 +9,10 @@ if (!isset($_SESSION['current_user_id'])) {
 
 <?php
     require("connection.php");
-    require("consultas/consulta_semana.php");
-    $consulta = "SELECT productos.nombre, productos_semanas.precio, categorias.nombre, unidades.nombre, productos_semanas.disp, productos.pid, productos.imagen
-                         FROM productos INNER JOIN categorias ON productos.cat_id = categorias.cat_id
-                                        INNER JOIN unidades ON productos.unit_id = unidades.unit_id
-                                        INNER JOIN productos_semanas ON productos.pid = productos_semanas.pid AND productos_semanas.sem_id = '$semana'";
+    $consulta = "SELECT * FROM escalas";
     $result = $my_db -> prepare($consulta);
     $result -> execute();
-    $productos = $result -> fetchAll();
+    $escalas = $result -> fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +21,7 @@ if (!isset($_SESSION['current_user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Precios y Disponibilidad</title>
+    <title>Escalas</title>
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
@@ -43,61 +39,48 @@ if (!isset($_SESSION['current_user_id'])) {
             <div class="container">
                 <div class="signup-content">
                     <div class="">
-                        <h2 class="form-title">Precios y Disponibilidad</h2>
+                        <h2 class="form-title">Escalas</h2>
                         <!-- <div class="form-group form-button">
                             <a href="new_product.php" class="form-submit" id="signup" role="button">Agregar Producto</a>
                         </div>
                         <div class="form-group form-button">
                             <a href="precio_disponibilidad.php" class="form-submit" id="signup" role="button">Modificar Precios o Disponibilidad</a>
                         </div> -->
-                        <form action='consultas/edit_precio_disp_consulta.php' method='post'>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a role="button" href="new_scale.php"  type="button" class="btn btn-secondary">Agregar Escala</a>
+                        </div>
+                        <br><br>
                         <table class="table">
                             <thead>
                                 <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Precio Actual</th>
-                                <th scope="col">Disp. Actual</th>
-                                <th scope="col">Nuevo Precio</th>
-                                <th scope="col">Nueva Disp.</th>
-                                <th scope="col">Guardar</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Inicio</th>
+                                <th scope="col">Fin</th>
+                                <th scope="col">Step</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 $contador = 1;
-                                 foreach($productos as $prod){
-                                     $disp = "No";
-                                     $check = "";
-                                     
-                                     if ($prod[4] == 1){
-                                        $disp = "Si";
-                                        $check = "checked='checked'";
-                                        
-                                     };
-                                     $name_ob = "disp" . $prod[5];
-                                    echo "
-                                    <tr class='thumbnail-item'>
+                                 foreach($escalas as $esc){
+                                    echo "<tr class='thumbnail-item'>
                                     <th scope='row'>$contador</th>
-                                    <td>$prod[0]</td>
-                                    <td>$prod[1]</td>
-                                    <td>$disp</td>
-                                    <td>
-                                        <div class='input-group-prepend'>
-                                            <span class='input-group-text' id='basic-addon1'>\$ </span>
-                                            <input name='precio' id='precio' type='text' class='form-control' value='$prod[1]' aria-describedby='basic-addon1'>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class='custom-control custom-checkbox'>
-                                            <input name='$name_ob' type='checkbox' class='custom-control-input' id='$prod[5]' value='si' $check>
-                                            <label class='custom-control-label' for='$prod[5]'>Disp.</label>
-                                        </div>
+                                    <td>$esc[1]</td>
+                                    <td>$esc[2]</td>
+                                    <td>$esc[3]</td>
+                                    <td>$esc[4]</td>
+                                    <td align='center'>
+                                        <form action='edit_scale.php' method='post'>
+                                            <button name='scale_id' type='submit' value='$esc[0]' class='btn btn-primary btn-sm'><i class='zmdi zmdi-edit material-icons-name'></i></button>
+                                        </form>
                                     </td>
                                     <td align='center'>
-                                        
-                                            <button name='product_id' type='submit' value='$prod[5]' class='btn btn-success btn-sm'><i class='zmdi zmdi-save material-icons-name'></i></button>
-                                        
+                                        <form action='consultas/delete_scale.php' method='post'>
+                                            <button name='scale_id' type='submit' value='$esc[0]' class='btn btn-danger btn-sm'><i class='zmdi zmdi-delete material-icons-name'></i></button>
+                                        </form>
                                     </td>
                                     </tr>";
                                     $contador += 1;
@@ -105,7 +88,6 @@ if (!isset($_SESSION['current_user_id'])) {
                                 ?>
                             </tbody>
                         </table>
-                        </form>
                     </div>
 
 

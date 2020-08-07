@@ -16,6 +16,11 @@ require("connection.php");
   $result_2 -> execute();
   $unidades = $result_2 -> fetchAll();
 
+  $query_3 = "SELECT descripcion, esc_id FROM escalas";
+  $result_3 = $my_db -> prepare($query_3);
+  $result_3 -> execute();
+  $escalas = $result_3 -> fetchAll();
+
   ?>
 
 <!DOCTYPE html>
@@ -77,10 +82,31 @@ require("connection.php");
                                 ?>
                             </select>
                             </div>
+                            <div class="form-group">
+                            <label for="sel1"><i class="zmdi zmdi-arrow-forward material-icons-name"></i> Escala</label>
+                            <br><br><br>
+                            <select class="form-control" id="sel1" name="escala">
+                                <?php
+                                foreach($escalas as $esc){
+                                    echo "<option value='$esc[1]'>$esc[0]</option>";
+                                };
+                                ?>
+                            </select>
+                            </div>
                             <br>
                             <div class="form-group">
                                 <label for="imagen"><i class="zmdi zmdi-image material-icons-carrot"></i></label>
                                 <input type="text" name="imagen" id="imagen" placeholder="Imagen"/>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="precio"><i class="zmdi zmdi-money material-icons-carrot"></i></label>
+                                <input type="text" name="precio" id="precio" placeholder="Precio"/>
+                            </div>
+                            <br>
+                            <div class='custom-control custom-checkbox'>
+                                <input name='disp' type='checkbox' class='custom-control-input' id='disp' value='si' >
+                                <label class='custom-control-label' for='disp'>Disponibilidad</label>
                             </div>
                 
                             <div class="form-group form-button">

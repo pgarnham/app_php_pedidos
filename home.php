@@ -38,6 +38,10 @@ if (!isset($_SESSION['current_user_id'])) {
                 <div class="form-group form-button">
                 <a href="products.php" class="form-submit" id="signup" role="button">Productos</a>
                 </div>
+
+                <div class="form-group form-button">
+                <a href="scales.php" class="form-submit" id="signup" role="button">Escalas</a>
+                </div>
             </div>
         </div>
     </div>

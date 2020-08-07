@@ -16,6 +16,11 @@ require("connection.php");
   $result_2 -> execute();
   $unidades = $result_2 -> fetchAll();
 
+  $query_4 = "SELECT descripcion, esc_id FROM escalas";
+  $result_4 = $my_db -> prepare($query_4);
+  $result_4 -> execute();
+  $escalas = $result_4 -> fetchAll();
+
   $id_producto = $_POST["product_id"];
 
   $query_3 = "SELECT * FROM productos WHERE productos.pid = $id_producto";
@@ -33,7 +38,7 @@ require("connection.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Nuevo Producto</title>
+    <title>Editar Producto</title>
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
@@ -52,7 +57,7 @@ require("connection.php");
             <div class="container">
                 <div class="signin-content">
                     <div class="signin-image">
-                        <?php echo "<figure><img src='$producto[4]' alt='sign up image'></figure>"; ?>
+                        <?php echo "<figure><img src='$producto[5]' alt='sign up image'></figure>"; ?>
                     </div>
 
                     <div class="signin-form">
@@ -91,7 +96,7 @@ require("connection.php");
                             <select class="form-control" id="sel1" name="unidad">
                                 <?php
                                 foreach($unidades as $unit){
-                                    if ($producto[4] == $unit[1]){
+                                    if ($producto[3] == $unit[1]){
                                         echo "<option selected='selected' value='$unit[1]'>$unit[0]</option>";
                                     }
                                     else {
@@ -104,9 +109,27 @@ require("connection.php");
                             </div>
                             <br>
                             <div class="form-group">
+                            <label for="sel1"><i class="zmdi zmdi-arrow-forward material-icons-name"></i> Escala</label>
+                            <br><br><br>
+                            <select class="form-control" id="sel1" name="escala">
+                                <?php
+                                foreach($escalas as $scale){
+                                    if ($producto[4] == $scale[1]){
+                                        echo "<option selected='selected' value='$scale[1]'>$scale[0]</option>";
+                                    }
+                                    else {
+                                        echo "<option value='$scale[1]'>$scale[0]</option>";
+                                    }
+                                    
+                                };
+                                ?>
+                            </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
                                 <label for="foto"><i class="zmdi zmdi-image material-icons-name"></i></label>
                                 <?php
-                                echo "<input type='text' value='$producto[4]' name='foto' id='foto'/>";
+                                echo "<input type='text' value='$producto[5]' name='foto' id='foto'/>";
                                 ?>
                             </div>
                             <input type="hidden" name="product_id" value="<?php echo $producto[0]; ?>">
