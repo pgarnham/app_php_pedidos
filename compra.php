@@ -18,24 +18,31 @@ if (!isset($_SESSION['current_user_id'])) {
     $productos = $result -> fetchAll();
 ?>
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/cart_style.css">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-    <script type="text/javascript" src="js/cart_script.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
 </head>
 <header id="site-header">
     <div class="container">
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Categorías</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="#home">Frutas</a>
+                <a href="#about">Verduras</a>
+                <a href="#contact">Abarrotes</a>
+            </div>
+        </div>
         <h1 class="total">Total: &#36 <span>0</span></h1>
     </div>
 </header>
- <br><br><br><br><br><br>
+ <br><br><br><br><br><br><br><br><br>
 <div class="container">
     <section id="cart">
         <?php foreach($productos as $prod){
-        echo "<article class='product' style='height: 420px;'>
+        echo "<article class='product' style='height: 420px !important;'>
             <header style='width: 300px; height: 300px;'>
                     <img src='$prod[6]' alt=''>
             </header>
@@ -51,7 +58,7 @@ if (!isset($_SESSION['current_user_id'])) {
                     Precio
                 </h2>
             </footer>
-            <footer class='content' style='position: relative; left: calc(50% - 350px); top: calc(50% - 210px);'>
+            <footer class='content' style='position: relative !important; left: calc(50% - 350px); top: calc(50% - 210px);'>
                 <span class='qt-minus' style='vertical-align:auto;'>-</span>
                 <span class='qt'>0</span>
                 <span class='qt-plus'>+</span>
@@ -84,3 +91,5 @@ if (!isset($_SESSION['current_user_id'])) {
 
     </div>
 </footer>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/cart_script.js"></script>
