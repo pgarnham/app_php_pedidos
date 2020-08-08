@@ -21,7 +21,8 @@ function changeTotal() {
   price = Math.round(price * 100) / 100;
   var tax = Math.round(price * 0.05 * 100) / 100
   var shipping = parseFloat($(".shipping span").html());
-  var fullPrice = Math.round((price + tax + shipping) *100) / 100;
+  /* var fullPrice = Math.round((price + tax + shipping) *100) / 100; */
+  var fullPrice = price;
   
   if(price == 0) {
     fullPrice = 0;
@@ -66,7 +67,7 @@ $(document).ready(function(){
     
     child = $(this).parent().children(".qt");
     
-    if(parseInt(child.html()) > 1) {
+    if(parseInt(child.html()) > 0) {
       child.html(parseInt(child.html()) - 1);
     }
     
