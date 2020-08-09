@@ -1,12 +1,6 @@
 <?php
 session_start();?>
 <?php
-if (!isset($_SESSION['current_user_id'])) {
-    echo '<script>window.location = "home.php" </script>';
-    exit;
-}
-?>
-<?php
     require("connection.php");
     require("consultas/consulta_semana.php");
     $consulta = "SELECT productos.nombre, productos_semanas.precio, categorias.nombre, unidades.nombre, productos_semanas.disp, productos.pid, productos.imagen
@@ -16,8 +10,15 @@ if (!isset($_SESSION['current_user_id'])) {
     $result = $my_db -> prepare($consulta);
     $result -> execute();
     $productos = $result -> fetchAll();
+
+    $consulta_cat = "SELECT * FROM categorias";
+    $res_cat = $my_db -> prepare($consulta_cat);
+    $res_cat -> execute();
+    $categorias = $res_cat -> fetchAll();
+    $len_cat = count($categorias);
 ?>
 <head>
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/cart_style.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
@@ -26,16 +27,18 @@ if (!isset($_SESSION['current_user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
 </head>
 <header id="site-header">
-    <div class="container">
+    <div class="container" style="height: 170px;">
         <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn">Categorías</button>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="#home">Frutas</a>
-                <a href="#about">Verduras</a>
-                <a href="#contact">Abarrotes</a>
+            <button onclick="myFunction()" class="dropbtn">Categorías <i class="zmdi zmdi-caret-down material-icons-carrot"></i></button>
+            <div id="myDropdown" class="dropdown-content" style="size: $len_cat;">
+                <?php
+                foreach($categorias as $cat){
+                    echo "<a href='#home'>$cat[1]</a>";
+                }    
+                 ?>
             </div>
         </div>
-        <h1 class="total">Total: &#36 <span>0</span></h1>
+        <h1 class="total" style="position: relative; top: -35px; border: 5px solid black; width: 260px; height: 90px; padding: 20px 13px; vertical-align: middle; left:410">Total: &#36 <span>0</span></h1>
     </div>
 </header>
  <br><br><br><br><br><br><br><br><br>
