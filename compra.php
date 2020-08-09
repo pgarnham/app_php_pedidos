@@ -24,16 +24,16 @@ session_start();?>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=0">
 </head>
 <header id="site-header">
     <div class="container" style="height: 170px;">
         <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn">Categorías <i class="zmdi zmdi-caret-down material-icons-carrot"></i></button>
-            <select id="myDropdown" class="dropdown-content" style="size: $len_cat;">
+<!--             <button onclick="myFunction()" class="dropbtn">Categorías <i class="zmdi zmdi-caret-down material-icons-carrot"></i></button>
+ -->            <select class="dropbtn" style="-webkit-appearance: none; padding: 15px 40px;">
                 <?php
                 foreach($categorias as $cat){
-                    echo "<option href='#home'>$cat[1]</option>";
+                    echo "<option class='dropbtn' style='padding: 15px 40px;' href='#home'>$cat[1]</option>";
                 }    
                  ?>
             </select>

@@ -466,12 +466,13 @@ a:hover {
 .dropbtn {
     background-color: #3498DB;
     color: white;
-    padding: 1px;
+    padding: 15px 40px;
     font-size: 28px;
     border: none;
     width: 260px;
     height: 80px;
     cursor: pointer;
+    -webkit-appearance: none;
   }
   
   .dropbtn:hover, .dropbtn:focus {
@@ -484,6 +485,7 @@ a:hover {
     left: 100px;
     top: 50px;
     font-size: 24px;
+    -webkit-appearance: none;
   }
   
   .dropdown-content {
@@ -496,6 +498,7 @@ a:hover {
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    -webkit-appearance: none;
   }
   
   .dropdown-content option {
@@ -503,6 +506,7 @@ a:hover {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    -webkit-appearance: none;
   }
   
   .dropdown option:hover {background-color: #ddd;}
