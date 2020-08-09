@@ -30,13 +30,13 @@ session_start();?>
     <div class="container" style="height: 170px;">
         <div class="dropdown">
             <button onclick="myFunction()" class="dropbtn">Categorías <i class="zmdi zmdi-caret-down material-icons-carrot"></i></button>
-            <div id="myDropdown" class="dropdown-content" style="size: $len_cat;">
+            <select id="myDropdown" class="dropdown-content" style="size: $len_cat;">
                 <?php
                 foreach($categorias as $cat){
-                    echo "<a href='#home'>$cat[1]</a>";
+                    echo "<option href='#home'>$cat[1]</option>";
                 }    
                  ?>
-            </div>
+            </select>
         </div>
         <h1 class="total" style="position: relative; top: -35px; border: 5px solid black; width: 260px; height: 90px; padding: 20px 13px; vertical-align: middle; left:410">Total: &#36 <span>0</span></h1>
     </div>
