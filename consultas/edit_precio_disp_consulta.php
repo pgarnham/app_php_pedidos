@@ -3,10 +3,12 @@
   require("consulta_semana.php");
 
  
-  $var_precio = $_POST["precio"];
+ 
   
   
   $pid = $_POST["product_id"];
+  $n_precio = "prize" . strval($pid);
+  $var_precio = $_POST[$n_precio];
   $key = "disp" . strval($pid);
   $var_disp = $_POST[$key];
   if ($var_disp == "si"){

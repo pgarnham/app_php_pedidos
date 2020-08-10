@@ -10,12 +10,14 @@ session_start();?>
     $result = $my_db -> prepare($consulta);
     $result -> execute();
     $productos = $result -> fetchAll();
+    echo $productos[0][0];
 
     $consulta_cat = "SELECT * FROM categorias";
     $res_cat = $my_db -> prepare($consulta_cat);
     $res_cat -> execute();
     $categorias = $res_cat -> fetchAll();
     $len_cat = count($categorias);
+    echo $categorias[0][1];
 ?>
 <head>
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
@@ -30,10 +32,10 @@ session_start();?>
     <div class="container" style="height: 170px;">
         <div class="dropdown">
 <!--             <button onclick="myFunction()" class="dropbtn">Categorías <i class="zmdi zmdi-caret-down material-icons-carrot"></i></button>
- -->            <select class="dropbtn" style="-webkit-appearance: none; padding: 15px 40px;">
+ -->            <select class="dropbtn" style="-webkit-appearance: none; padding: 15px 40px;" id="select-anchor">
                 <?php
                 foreach($categorias as $cat){
-                    echo "<option class='dropbtn' style='padding: 15px 40px;' href='#home'>$cat[1]</option>";
+                    echo "<option class='dropbtn' value='#checkoutt' style='padding: 15px 40px;'>$cat[1]</option>";
                 }    
                  ?>
             </select>
@@ -44,38 +46,46 @@ session_start();?>
  <br><br><br><br><br><br><br><br><br>
 <div class="container">
     <section id="cart">
+    <nav aria-label="breadcrumb" style="height: 80px; width: 660px; font-size: 32px; font-weight: bold;">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Verduras</li>
+            </ol>
+        </nav>
         <?php foreach($productos as $prod){
         echo "<article class='product' style='height: 420px !important;'>
             <header style='width: 300px; height: 300px;'>
                     <img src='$prod[6]' alt=''>
             </header>
 
-            <div class='content' style='height: 300px; width: 335px; position: relative; left: calc(50% - 330px); top: calc(50% - 210px);'>
+            <div class='content' style='height: 300px; width: 355px; position: relative; left: calc(50% - 350px); top: calc(50% - 210px);'>
                 <h1 style='font-size: 30px;'>$prod[0]</h1>
+                <h2 class='price'>
+                    &#36 $prod[1]
+                </h2>
             </div>
-            <footer class='content' style='height: 50px; position: relative; left: calc(50% - 350px); top: calc(50% - 210px);'>
+            <footer class='content' style='height: 50px; position: relative; left: calc(50% - 350px); top: calc(50% - 240px);'>
                 <h2 class='full-price-1'>
                     Total producto
                 </h2>
-                <h2 class='price-1'>
-                    Precio
-                </h2>
             </footer>
-            <footer class='content' style='position: relative !important; left: calc(50% - 350px); top: calc(50% - 210px);'>
-                <span class='qt-minus' style='vertical-align:auto;'>-</span>
+            <footer class='content' style='position: relative !important; left: calc(50% - 350px); top: calc(50% - 250px);'>
+                <span class='qt-minus' style='vertical-align:auto; padding: 0 51px;'>-</span>
                 <span class='qt'>0</span>
-                <span class='qt-plus'>+</span>
-
+                <span class='qt-plus' style='padding: 0 51px;'>+</span>
                 <h2 class='full-price'>
-                    0 &#36
+                0
                 </h2>
-
-                <h2 class='price'>
+                <h2 class='price' style='visibility: hidden;'>
                     $prod[1] &#36
                 </h2>
             </footer>
         </article>
         <br><br><br><br>";}?>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Verduras</li>
+            </ol>
+        </nav>
     </section>
 
 </div>
@@ -88,7 +98,7 @@ session_start();?>
             <h3 class="tax">Taxes (5%): <span>8.2</span>&#36</h3>
             <h3 class="shipping">Shipping: <span>5.00</span>&#36</h3>
         </div>
-        <div class="left">
+        <div class="left" id="checkoutt">
             <a class="btn">Checkout</a>
         </div>
 

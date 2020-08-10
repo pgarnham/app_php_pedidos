@@ -5,7 +5,7 @@ function changeVal(el) {
   var price = parseFloat(el.parent().children(".price").html());
   var eq = Math.round(price * qt * 100) / 100;
   
-  el.parent().children(".full-price").html( eq + "$" );
+  el.parent().children(".full-price").html(eq);
   
   changeTotal();            
 }
@@ -15,12 +15,12 @@ function changeTotal() {
   var price = 0;
   
   $(".full-price").each(function(index){
-    price += parseFloat($(".full-price").eq(index).html());
+    price += parseInt($(".full-price").eq(index).html());
   });
   
-  price = Math.round(price * 100) / 100;
-  var tax = Math.round(price * 0.05 * 100) / 100
-  var shipping = parseFloat($(".shipping span").html());
+  /* price = Math.round(price * 100) / 100; */
+  /* var tax = Math.round(price * 0.05 * 100) / 100;
+  var shipping = parseFloat($(".shipping span").html()); */
   /* var fullPrice = Math.round((price + tax + shipping) *100) / 100; */
   var fullPrice = price;
   
@@ -29,7 +29,7 @@ function changeTotal() {
   }
   
   $(".subtotal span").html(price);
-  $(".tax span").html(tax);
+  /* $(".tax span").html(tax); */
   $(".total span").html(fullPrice);
 }
 
@@ -83,4 +83,11 @@ $(document).ready(function(){
     check = true;
     $(".remove").click();
   });
+});
+
+$(document).ready(function () {
+    $('#select-anchor').change( function () {
+        var targetPosition = $($(this).val()).offset().top;
+        $('html,body').animate({ scrollTop: targetPosition}, 'slow');
+    });
 });

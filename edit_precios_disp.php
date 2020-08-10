@@ -76,6 +76,8 @@ if (!isset($_SESSION['current_user_id'])) {
                                         
                                      };
                                      $name_ob = "disp" . $prod[5];
+                                     $name_prize = "prize" . $prod[5];
+                                     $id_name = "pid" . $prod[5];
                                     echo "
                                     <tr class='thumbnail-item'>
                                     <th scope='row'>$contador</th>
@@ -85,7 +87,7 @@ if (!isset($_SESSION['current_user_id'])) {
                                     <td>
                                         <div class='input-group-prepend'>
                                             <span class='input-group-text' id='basic-addon1'>\$ </span>
-                                            <input name='precio' id='precio' type='text' class='form-control' value='$prod[1]' aria-describedby='basic-addon1'>
+                                            <input name='$name_prize' id='precio' type='text' class='form-control' value='$prod[1]' aria-describedby='basic-addon1'>
                                         </div>
                                     </td>
                                     <td>
