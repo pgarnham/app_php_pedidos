@@ -3,23 +3,21 @@ session_start();?>
 <?php
     require("connection.php");
     require("consultas/consulta_semana.php");
-    $consulta = "SELECT productos.nombre, productos_semanas.precio, categorias.nombre, unidades.nombre, productos_semanas.disp, productos.pid, productos.imagen
-                         FROM productos INNER JOIN categorias ON productos.cat_id = categorias.cat_id
-                                        INNER JOIN unidades ON productos.unit_id = unidades.unit_id
-                                        INNER JOIN productos_semanas ON productos.pid = productos_semanas.pid AND productos_semanas.sem_id = '$semana'";
-    $result = $my_db -> prepare($consulta);
-    $result -> execute();
-    $productos = $result -> fetchAll();
-    echo $productos[0][0];
 
     $consulta_cat = "SELECT * FROM categorias";
     $res_cat = $my_db -> prepare($consulta_cat);
     $res_cat -> execute();
     $categorias = $res_cat -> fetchAll();
     $len_cat = count($categorias);
-    echo $categorias[0][1];
+    $js_cat = [];
+    foreach ($categorias as $c){
+        array_push($js_cat, $c[0]);
+    }
 ?>
 <head>
+    <script type='text/javascript'>
+        var js_categorias = [<?php echo '"'.implode('","', $js_cat).'"' ?>];
+    </script>
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/cart_style.css">
@@ -35,7 +33,8 @@ session_start();?>
  -->            <select class="dropbtn" style="-webkit-appearance: none; padding: 15px 40px;" id="select-anchor">
                 <?php
                 foreach($categorias as $cat){
-                    echo "<option class='dropbtn' value='#checkoutt' style='padding: 15px 40px;'>$cat[1]</option>";
+                    $name_value = "#cat" . strval($cat[0]);
+                    echo "<option value='$name_value' class='dropbtn' style='padding: 15px 40px;'>$cat[1]</option>";
                 }    
                  ?>
             </select>
@@ -46,11 +45,22 @@ session_start();?>
  <br><br><br><br><br><br><br><br><br>
 <div class="container">
     <section id="cart">
-    <nav aria-label="breadcrumb" style="height: 80px; width: 660px; font-size: 32px; font-weight: bold;">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Verduras</li>
-            </ol>
-        </nav>
+    <?php foreach($categorias as $cat){
+        $cat_id = "cat" . strval($cat[0]);
+        echo "<div id='$cat_id'>";
+        echo "<nav aria-label='breadcrumb' style='height: 80px; width: 660px; font-size: 32px; font-weight: bold;'>
+        <ol class='breadcrumb'>
+            <li class='breadcrumb-item active' aria-current='page'>$cat[1]</li>
+        </ol>
+    </nav>";
+    $consulta = "SELECT productos.nombre, productos_semanas.precio, categorias.nombre, unidades.nombre, productos_semanas.disp, productos.pid, productos.imagen
+                         FROM productos INNER JOIN categorias ON productos.cat_id = categorias.cat_id
+                                        INNER JOIN unidades ON productos.unit_id = unidades.unit_id
+                                        INNER JOIN productos_semanas ON productos.pid = productos_semanas.pid AND productos_semanas.sem_id = '$semana' WHERE productos.cat_id = $cat[0]";
+    $result = $my_db -> prepare($consulta);
+    $result -> execute();
+    $productos = $result -> fetchAll();
+    ?>
         <?php foreach($productos as $prod){
         echo "<article class='product' style='height: 420px !important;'>
             <header style='width: 300px; height: 300px;'>
@@ -80,12 +90,9 @@ session_start();?>
                 </h2>
             </footer>
         </article>
-        <br><br><br><br>";}?>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Verduras</li>
-            </ol>
-        </nav>
+        <br><br><br><br>";}
+        echo "</div>";
+        }?>
     </section>
 
 </div>

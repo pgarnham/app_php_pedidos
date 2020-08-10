@@ -86,8 +86,28 @@ $(document).ready(function(){
 });
 
 $(document).ready(function () {
-    $('#select-anchor').change( function () {
-        var targetPosition = $($(this).val()).offset().top;
-        $('html,body').animate({ scrollTop: targetPosition}, 'slow');
+    $('#select-anchor').change( function (e) {
+        if (e.originalEvent){
+            var targetPosition = $($(this).val()).offset().top;
+            $('html,body').animate({ scrollTop: targetPosition}, 'slow');
+        }
+        
     });
 });
+
+
+ $(window).scroll(function() {
+
+    for (let categoria of js_categorias){
+        var common_str = "#cat";
+        var id_categoria = common_str.concat(categoria);
+        var hT = $(id_categoria).offset().top,
+        hH = $(id_categoria).outerHeight(),
+        wH = $(window).height(),
+        wS = $(this).scrollTop();
+        if (wS > (hT+hH-wH)){
+            $('#select-anchor').val(id_categoria);
+        }
+    }
+    
+ });
