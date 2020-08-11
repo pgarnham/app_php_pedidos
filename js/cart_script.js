@@ -1,11 +1,17 @@
 var check = false;
 
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0
+  })
+
 function changeVal(el) {
   var qt = parseFloat(el.parent().children(".qt").html());
   var price = parseFloat(el.parent().children(".price").html());
   var eq = Math.round(price * qt * 100) / 100;
   
-  el.parent().children(".full-price").html(eq);
+  el.parent().children(".full-price").html(formatter.format(eq));
   
   changeTotal();            
 }
@@ -15,7 +21,7 @@ function changeTotal() {
   var price = 0;
   
   $(".full-price").each(function(index){
-    price += parseInt($(".full-price").eq(index).html());
+    price += parseInt($(".full-price").eq(index).html().replace(/[$,]+/g,""));
   });
   
   /* price = Math.round(price * 100) / 100; */
@@ -28,9 +34,9 @@ function changeTotal() {
     fullPrice = 0;
   }
   
-  $(".subtotal span").html(price);
+  $(".subtotal span").html(formatter.format(price));
   /* $(".tax span").html(tax); */
-  $(".total span").html(fullPrice);
+  $(".total span").html(formatter.format(fullPrice));
 }
 
 $(document).ready(function(){

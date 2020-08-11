@@ -39,7 +39,7 @@ session_start();?>
                  ?>
             </select>
         </div>
-        <h1 class="total" style="position: relative; top: -35px; border: 5px solid black; width: 260px; height: 90px; padding: 20px 13px; vertical-align: middle; left:410">Total: &#36 <span>0</span></h1>
+        <h1 class="total" style="position: relative; top: -35px; border: 5px solid black; width: 260px; height: 90px; padding: 20px 13px; vertical-align: middle; left:410">Total:  <span>0</span></h1>
     </div>
 </header>
  <br><br><br><br><br><br><br><br><br>
