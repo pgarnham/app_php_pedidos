@@ -44,6 +44,7 @@ session_start();?>
     </div>
 </header>
  <br><br><br><br><br><br><br><br><br>
+ <form method="POST" id="pedir" action="ingresar_pedido.php">
 <div class="container">
     <section id="cart">
     <?php foreach($categorias as $cat){
@@ -86,6 +87,7 @@ session_start();?>
                 <span class='qt-minus' style='vertical-align:auto; padding: 0 51px;'>-</span>
                 <span class='qt'>0</span>
                 <span class='qt-plus' style='padding: 0 51px;'>+</span>
+                <input type='text' id='cant$prod[5]' name='cant$prod[5]' class='cantidad' style='visibility: hidden; width: 0; height: 0;'>
                 <h2 class='full-price'>
                 0
                 </h2>
@@ -98,7 +100,7 @@ session_start();?>
         echo "</div>";
         }?>
     </section>
-
+    </form>
 </div>
 <br>
 <footer id="site-footer">

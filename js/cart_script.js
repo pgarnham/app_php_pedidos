@@ -62,13 +62,14 @@ $(document).ready(function(){
   
   $(".qt-plus").click(function(){
     id = $(this).parent().attr('id');
-    console.log(id);
     actual_pid = id.slice(7);
-    console.log(actual_pid);
     actual_step = dict_steps[actual_pid];
-    console.log(actual_step);
-    $(this).parent().children(".qt").html(parseFloat($(this).parent().children(".qt").html()) + actual_step);
-    
+    actual_value = parseFloat($(this).parent().children(".qt").html());
+    new_value = actual_value + actual_step;
+    $(this).parent().children(".qt").html(new_value);
+    input_id = "cant" + actual_pid;
+    $(input_id).val(new_value.toString());
+
     $(this).parent().children(".full-price").addClass("added");
     
     var el = $(this);
@@ -81,9 +82,13 @@ $(document).ready(function(){
     id = $(this).parent().attr('id');
     actual_pid = id.slice(7);
     actual_step = parseFloat(dict_steps[actual_pid]);
+    actual_value = child.html();
+    new_value = actual_value - actual_step;
     
     if(parseFloat(child.html()) > 0) {
-      child.html(parseFloat(child.html()) - actual_step);
+      child.html(new_value);
+      input_id = "cant" + actual_pid;
+      $(input_id).val(new_value.toString());
     }
     
     $(this).parent().children(".full-price").addClass("minused");
