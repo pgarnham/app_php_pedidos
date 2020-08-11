@@ -100,22 +100,15 @@ session_start();?>
         echo "</div>";
         }?>
     </section>
-    </form>
+    
 </div>
-<br>
-<footer id="site-footer">
-    <div class="container clearfix">
-
-        <div class="left">
-            <h2 class="subtotal">Subtotal: <span>163.96</span>&#36</h2>
-            <h3 class="tax">Taxes (5%): <span>8.2</span>&#36</h3>
-            <h3 class="shipping">Shipping: <span>5.00</span>&#36</h3>
+        <div class="text-xs-center">
+            <button type="submit" class="btn btn-success ingpedido">Ingresar Pedido</button>
         </div>
-        <div class="left" id="checkoutt">
-            <a class="btn">Checkout</a>
-        </div>
+    
 
-    </div>
-</footer>
+<br><br><br><br>
+
+</form>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="js/cart_script.js"></script>

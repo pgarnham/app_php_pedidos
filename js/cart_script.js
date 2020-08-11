@@ -34,7 +34,7 @@ function changeTotal() {
     fullPrice = 0;
   }
   
-  $(".subtotal span").html(formatter.format(price));
+  /* $(".subtotal span").html(formatter.format(price)); */
   /* $(".tax span").html(tax); */
   $(".total span").html(formatter.format(fullPrice));
 }

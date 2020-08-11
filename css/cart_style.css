@@ -517,3 +517,13 @@ a:hover {
       position: relative;
       top: 5px;
   }
+
+  .ingpedido {
+    /* position: relative;
+    left: 250px; */
+    height: 100px;
+    width: 300;
+    font-size: 30;
+    font-weight: bold;
+    margin: auto;
+  }
