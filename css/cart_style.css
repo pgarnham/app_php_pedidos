@@ -240,11 +240,11 @@ a:hover {
     margin: 0 !important;
     padding: 20px 45px !important;
 
-    -webkit-transition: margin .15s linear;
-    -moz-transition: margin .15s linear;
-    -ms-transition: margin .15s linear;
-    -o-transition: margin .15s linear;
-    transition: margin .15s linear;
+    -webkit-transition: margin .15s linear !important;
+    -moz-transition: margin .15s linear !important;
+    -ms-transition: margin .15s linear !important;
+    -o-transition: margin .15s linear !important;
+    transition: margin .15s linear !important;
 }
 
 .qt, .qt-plus, .qt-minus {
@@ -267,11 +267,11 @@ a:hover {
     height: 100%;
     padding: 0 51px;
     text-align: center;
-    -webkit-transition: background .2s linear;
-    -moz-transition: background .2s linear;
-    -ms-transition: background .2s linear;
-    -o-transition: background .2s linear;
-    transition: background .2s linear;
+    -webkit-transition: background .2s linear !important;
+    -moz-transition: background .2s linear !important;
+    -ms-transition: background .2s linear !important;
+    -o-transition: background .2s linear !important;
+    transition: background .2s linear !important;
 }
 
 .qt-plus:hover, .qt-minus:hover {

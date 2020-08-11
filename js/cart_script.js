@@ -61,7 +61,13 @@ $(document).ready(function(){
   });
   
   $(".qt-plus").click(function(){
-    $(this).parent().children(".qt").html(parseInt($(this).parent().children(".qt").html()) + 1);
+    id = $(this).parent().attr('id');
+    console.log(id);
+    actual_pid = id.slice(7);
+    console.log(actual_pid);
+    actual_step = dict_steps[actual_pid];
+    console.log(actual_step);
+    $(this).parent().children(".qt").html(parseFloat($(this).parent().children(".qt").html()) + actual_step);
     
     $(this).parent().children(".full-price").addClass("added");
     
@@ -72,9 +78,12 @@ $(document).ready(function(){
   $(".qt-minus").click(function(){
     
     child = $(this).parent().children(".qt");
+    id = $(this).parent().attr('id');
+    actual_pid = id.slice(7);
+    actual_step = parseFloat(dict_steps[actual_pid]);
     
-    if(parseInt(child.html()) > 0) {
-      child.html(parseInt(child.html()) - 1);
+    if(parseFloat(child.html()) > 0) {
+      child.html(parseFloat(child.html()) - actual_step);
     }
     
     $(this).parent().children(".full-price").addClass("minused");

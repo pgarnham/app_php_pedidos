@@ -25,6 +25,7 @@ session_start();?>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=0">
+    <script>dict_steps = new Object();</script>
 </head>
 <header id="site-header">
     <div class="container" style="height: 170px;">
@@ -53,15 +54,18 @@ session_start();?>
             <li class='breadcrumb-item active' aria-current='page'>$cat[1]</li>
         </ol>
     </nav>";
-    $consulta = "SELECT productos.nombre, productos_semanas.precio, categorias.nombre, unidades.nombre, productos_semanas.disp, productos.pid, productos.imagen
+    $consulta = "SELECT productos.nombre, productos_semanas.precio, categorias.nombre, unidades.nombre, productos_semanas.disp, productos.pid, productos.imagen, escalas.step
                          FROM productos INNER JOIN categorias ON productos.cat_id = categorias.cat_id
                                         INNER JOIN unidades ON productos.unit_id = unidades.unit_id
-                                        INNER JOIN productos_semanas ON productos.pid = productos_semanas.pid AND productos_semanas.sem_id = '$semana' WHERE productos.cat_id = $cat[0]";
+                                        INNER JOIN productos_semanas ON productos.pid = productos_semanas.pid AND productos_semanas.sem_id = '$semana'
+                                        INNER JOIN escalas ON escalas.esc_id= productos.esc_id
+                                                    WHERE productos.cat_id = $cat[0]";
     $result = $my_db -> prepare($consulta);
     $result -> execute();
     $productos = $result -> fetchAll();
     ?>
         <?php foreach($productos as $prod){
+        echo "<script> dict_steps[$prod[5]] = $prod[7]</script>";
         echo "<article class='product' style='height: 420px !important;'>
             <header style='width: 300px; height: 300px;'>
                     <img src='$prod[6]' alt=''>
@@ -78,7 +82,7 @@ session_start();?>
                     Total producto
                 </h2>
             </footer>
-            <footer class='content' style='position: relative !important; left: calc(50% - 350px); top: calc(50% - 250px);'>
+            <footer class='content' id='prodpid$prod[5]' style='position: relative !important; left: calc(50% - 350px); top: calc(50% - 250px);'>
                 <span class='qt-minus' style='vertical-align:auto; padding: 0 51px;'>-</span>
                 <span class='qt'>0</span>
                 <span class='qt-plus' style='padding: 0 51px;'>+</span>
