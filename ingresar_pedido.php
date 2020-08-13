@@ -141,7 +141,7 @@ foreach ($productos_precios as $prod_pre){
                                 <input type="text" name="new_condomino" id="new_condominio" placeholder="Condominio"/>
                             </div>
                             <div class="form-group">
-                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" value="si" checked>
                                 <label for="agree-term" class="label-agree-term"><span><span></span></span>Quiero guardar mis datos para otra compra</label>
                             </div>
                             <div class="form-group form-button">
