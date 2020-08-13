@@ -16,12 +16,23 @@ $pre_query_com = $my_db -> prepare($query_com);
 $pre_query_com -> execute();
 $comunas = $pre_query_com -> fetchAll();
 
-
+$query_users = "SELECT correo FROM usuarios";
+$pre_query_users = $my_db -> prepare($query_users);
+$pre_query_users -> execute();
+$users = $pre_query_users -> fetchAll();
+$js_users = [];
+    foreach ($users as $user){
+        array_push($js_users, $user[0]);
+    }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type='text/javascript'>
+        var js_correos = [<?php echo '"'.implode('","', $js_users).'"' ?>];
+        var set_correos = new Set(js_correos);
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -43,7 +54,7 @@ $comunas = $pre_query_com -> fetchAll();
         <div class="signin-content" style="padding-top: 20px; padding-bottom: 30px;">
             <div class="signin-form">
                 <h2 class="form-title">Si ya pediste antes</h2>
-                <form method="POST" class="register-form" id="login-form" action="consultas/pedido_cliente.php">
+                <form method="POST" class="register-form" id="login-form" action="consultas/pedido_cliente.php" onsubmit="return checkUser(this);">
                     <div class="form-group">
                         <label for="your_email"><i class="zmdi zmdi-email material-icons-name"></i></label>
                         <input type="email" name="your_email" id="your_email" placeholder="Tu correo" required>

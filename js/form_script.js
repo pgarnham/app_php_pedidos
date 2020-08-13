@@ -7,3 +7,13 @@ function checkEmail(theForm) {
         return true;
     }
 }
+
+function checkUser(theForm) {
+    if (!set_correos.has(theForm.your_email.value))
+    {
+        alert('Este correo no tiene datos asociados!');
+        return false;
+    } else {
+        return true;
+    }
+}
