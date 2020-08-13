@@ -4,7 +4,14 @@ function checkEmail(theForm) {
         alert('Los correos ingresados no coinciden!');
         return false;
     } else {
-        return true;
+        if (set_correos.has(theForm.new_email.value)){
+            alert('Ya existe un usuario con ese correo!');
+            return false;
+        }
+        else{
+            return true;
+        }
+        
     }
 }
 
