@@ -30,7 +30,7 @@ foreach ($productos_precios as $prod_pre){
     if( isset($_POST[$name_var]) )
     {
         if ( $_POST[$name_var] > 0){
-            array_push($cantidades, $prod_pre);
+            array_push($cantidades, [$prod_pre[0], $_POST[$name_var]]);
         }
     }
 }
