@@ -24,6 +24,16 @@ $js_users = [];
     foreach ($users as $user){
         array_push($js_users, $user[0]);
     }
+$cantidades = [];
+foreach ($productos_precios as $prod_pre){
+    $name_var = "cant" + strval($prod_pre[0]);
+    if( isset($_POST[$name_var]) )
+    {
+        if ( $_POST[$name_var] > 0){
+            array_push($cantidades, $prod_pre);
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +65,11 @@ $js_users = [];
             <div class="signin-form">
                 <h2 class="form-title">Si ya pediste antes</h2>
                 <form method="POST" class="register-form" id="login-form" action="consultas/pedido_cliente.php" onsubmit="return checkUser(this);">
+                <?php 
+                        foreach($cantidades as $cant){
+                            echo "<input type='text' value='$cant[1]' id='cant_u$cant[0]' name='cant$prod[0]' class='cantidad' style='visibility: hidden; width: 0; height: 0;'>";
+                        }
+                        ?>
                     <div class="form-group">
                         <label for="your_email"><i class="zmdi zmdi-email material-icons-name"></i></label>
                         <input type="email" name="your_email" id="your_email" placeholder="Tu correo" required>
@@ -78,6 +93,11 @@ $js_users = [];
                     <div class="signup-form">
                         <h2 class="form-title">¿Primera Compra?</h2>
                         <form method="POST" class="register-form" id="register-form" action="consultas/pedido_nuevo_cliente.php" onsubmit="return checkEmail(this);">
+                        <?php 
+                        foreach($cantidades as $cant){
+                            echo "<input type='text' value='$cant[1]' id='cant$cant[0]' name='cant$prod[0]' class='cantidad' style='visibility: hidden; width: 0; height: 0;'>";
+                        }
+                        ?>
                             <div class="form-group">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" name="new_name" id="name" placeholder="Nombre" required>
