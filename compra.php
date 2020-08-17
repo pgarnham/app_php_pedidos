@@ -1,6 +1,4 @@
 <?php
-session_start();?>
-<?php
     require("connection.php");
     require("consultas/consulta_semana.php");
 
@@ -67,6 +65,7 @@ session_start();?>
     ?>
         <?php foreach($productos as $prod){
         echo "<script> dict_steps[$prod[5]] = $prod[7]</script>";
+        $id_name = "cantidad_" . strval($prod[5]);
         echo "<article class='product' style='height: 420px !important;'>
             <header style='width: 300px; height: 300px;'>
                     <img src='$prod[6]' alt=''>
@@ -87,7 +86,7 @@ session_start();?>
                 <span class='qt-minus' style='vertical-align:auto; padding: 0 51px;'>-</span>
                 <span class='qt'>0</span>
                 <span class='qt-plus' style='padding: 0 51px;'>+</span>
-                <input type='text' id='cant$prod[5]' name='cant$prod[5]' class='cantidad' style='visibility: hidden; width: 0; height: 0;'>
+                <input type='hidden' class='mi_input' value='' id='$id_name' name='$id_name' style='width: 0; height: 0;'/>
                 <h2 class='full-price'>
                 0
                 </h2>
@@ -108,6 +107,7 @@ session_start();?>
     
 
 <br><br><br><br>
+
 
 </form>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>

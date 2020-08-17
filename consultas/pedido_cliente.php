@@ -2,25 +2,9 @@
   require("../connection.php"); #Llama a conexión, crea el objeto PDO y obtiene la variable $db
   require("consulta_semana.php");
 
-  $var_name = $_POST["new_name"];
-  $var_last_name = $_POST["new_last_name"];
-  $var_email = $_POST["new_email"];
-  $var_address = $_POST["new_address"];
-  $var_comuna = $_POST["comuna"];
-  $var_condo = $_POST["new_condominio"];
-  $var_phone = $_POST["new_phone"];
-  $guardar = $_POST["agree-term"];
-  $tipo = 3;
+  $var_email = $_POST["your_email"];
 
-  if ($guardar != "si"){
-      $tipo = 4;
-  }
-
-    $crear = "INSERT INTO usuarios (nombre, direccion, correo, telefono, com_id, condominio, type) 
-            VALUES ('$var_name . $var_last_name', '$var_address', '$var_email', '$var_phone', $var_comuna, '$var_condo', $tipo)";
   
-  $result = $my_db -> prepare($crear);
-  $result -> execute();
 
   $usuario = "SELECT uid FROM usuarios WHERE correo = $var_email";
   $result = $my_db -> prepare($usuario);
@@ -38,10 +22,36 @@
   $pe_id = $res -> fetchAll();
   $pe_id = $pe_id[0][0];
 
-  /* echo '<script language="javascript">';
-  echo 'alert("Usuario registrado con éxito!")';
-  echo '</script>'; */
+  $query_prod = "SELECT productos.pid, productos_semanas.precio
+                    FROM productos INNER JOIN productos_semanas
+                                     ON productos.pid = productos_semanas.pid AND productos_semanas.sem_id = '$semana'";
+  $pre_query_prod = $my_db -> prepare($query_prod);
+  $pre_query_prod -> execute();
+  $productos_precios = $pre_query_prod -> fetchAll();
 
-  echo '<script>window.location = "../products.php" </script>';
+  $query_pedido = "INSERT INTO item_pedido (pe_id, pid, cantidad, precio)
+                    VALUES ";
+  $contador = 0;
+  foreach ($productos_precios as $prod_pre){
+    $name_var = "cant" + strval($prod_pre[0]);
+    if( isset($_POST[$name_var]) )
+    {
+        if ( $_POST[$name_var] > 0){
+            if ($contador == 0){
+              $query_pedido = $query_pedido . "('$pe_id', $prod_pre[0], $prod_pre[1], $_POST[$name_var]),";
+              $contador += 1;
+            }
+            else{
+              $query_pedido = $query_pedido . ", ('$pe_id', $prod_pre[0], $prod_pre[1], $_POST[$name_var]),";
+            }
+        }
+    }
+}
+  $insertando_compra = $my_db -> prepare($query_pedido);
+  $insertando_compra -> execute();
+
+  require("enviar_correo.php");
+
+  echo '<script>window.location = "../compra_exitosa.php" </script>';
 
   ?>

@@ -1,12 +1,10 @@
-<?php 
-session_start(); 
-
+<?php
 require("connection.php");
 require("consultas/consulta_semana.php");
 
 $query_prod = "SELECT productos.pid, productos_semanas.precio
                     FROM productos INNER JOIN productos_semanas
-                                     ON productos.pid = productos_semanas.pid AND productos_semanas.sem_id = '$semana'";
+                                     ON productos.pid = productos_semanas.pid AND productos_semanas.sem_id = $semana";
 $pre_query_prod = $my_db -> prepare($query_prod);
 $pre_query_prod -> execute();
 $productos_precios = $pre_query_prod -> fetchAll();
@@ -16,17 +14,19 @@ $pre_query_com = $my_db -> prepare($query_com);
 $pre_query_com -> execute();
 $comunas = $pre_query_com -> fetchAll();
 
-$query_users = "SELECT correo FROM usuarios";
+$query_users = "SELECT correo, type FROM usuarios";
 $pre_query_users = $my_db -> prepare($query_users);
 $pre_query_users -> execute();
 $users = $pre_query_users -> fetchAll();
 $js_users = [];
     foreach ($users as $user){
-        array_push($js_users, $user[0]);
+        if ($user[1] == 3){
+            array_push($js_users, $user[0]);
+        }
     }
 $cantidades = [];
 foreach ($productos_precios as $prod_pre){
-    $name_var = "cant" + strval($prod_pre[0]);
+    $name_var = "cantidad_" . strval($prod_pre[0]);
     if( isset($_POST[$name_var]) )
     {
         if ( $_POST[$name_var] > 0){
@@ -67,7 +67,7 @@ foreach ($productos_precios as $prod_pre){
                 <form method="POST" class="register-form" id="login-form" action="consultas/pedido_cliente.php" onsubmit="return checkUser(this);">
                 <?php 
                         foreach($cantidades as $cant){
-                            echo "<input type='text' value='$cant[1]' id='cant_u$cant[0]' name='cant$prod[0]' class='cantidad' style='visibility: hidden; width: 0; height: 0;'>";
+                            echo "<input type='hidden' value='$cant[1]' id='cant_u$cant[0]' name='cant$prod_pre[0]' class='cantidad' style='width: 0; height: 0;'/>";
                         }
                         ?>
                     <div class="form-group">
@@ -95,7 +95,9 @@ foreach ($productos_precios as $prod_pre){
                         <form method="POST" class="register-form" id="register-form" action="consultas/pedido_nuevo_cliente.php" onsubmit="return checkEmail(this);">
                         <?php 
                         foreach($cantidades as $cant){
-                            echo "<input type='text' value='$cant[1]' id='cant$cant[0]' name='cant$prod[0]' class='cantidad' style='visibility: hidden; width: 0; height: 0;'>";
+                            $input_id = "cant" . strval($cant[0]);
+                            #$input_name = "cant" . strval($prod_pre[0]);
+                            echo "<input type='hidden' value='$cant[1]' id='$input_id' name='$input_id' class='cantidad'  style='width: 0; height: 0;'>";
                         }
                         ?>
                             <div class="form-group">
@@ -155,6 +157,22 @@ foreach ($productos_precios as $prod_pre){
        
 
     </div>
+    <?php 
+
+
+    foreach ($_POST as $key => $value) {
+        echo "<tr>";
+        echo "<td>";
+        echo $key;
+        echo "</td>";
+        echo "<td>";
+        echo $value;
+        echo "</td>";
+        echo "</tr>";
+    }
+
+
+?>
 
     <!-- JS -->
     <script src="vendor/jquery/jquery.min.js"></script>
