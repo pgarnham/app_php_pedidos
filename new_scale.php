@@ -33,6 +33,10 @@ session_start();
 
                     <div class="signin-form">
                         <h2 class="form-title">Agregar Escala</h2>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a role="button" href="scales.php" type="button" class="btn btn-secondary">Volver a Escalas</a>
+                        </div>
+                        <br><br>
                         <form method="POST" class="register-form" id="login-form" action="consultas/insert_scale.php">
                             <div class="form-group">
                                 <label for="descripcion"><i class="zmdi zmdi-codepen material-icons-carrot"></i></label>

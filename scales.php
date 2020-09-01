@@ -48,6 +48,7 @@ if (!isset($_SESSION['current_user_id'])) {
                         </div> -->
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <a role="button" href="new_scale.php"  type="button" class="btn btn-secondary">Agregar Escala</a>
+                            <a role="button" href="home.php" type="button" class="btn btn-secondary">Volver a Panel de Control</a>
                         </div>
                         <br><br>
                         <table class="table">

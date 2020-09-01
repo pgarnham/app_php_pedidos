@@ -59,7 +59,10 @@ require("connection.php");
                         <?php
                             echo "<h2 class='form-title'>Editar Escala</h2>";
                         ?>
-                        
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a role="button" href="scales.php" type="button" class="btn btn-secondary">Volver a Escalas</a>
+                        </div>
+                        <br><br>
                         <form method="POST" class="register-form" id="login-form" action="consultas/edit_scale_consulta.php">
                             <div class="form-group">
                                 <label for="desc"><i class="zmdi zmdi-cake material-icons-name"></i></label>

@@ -44,6 +44,10 @@ if (!isset($_SESSION['current_user_id'])) {
                 <div class="signup-content">
                     <div class="">
                         <h2 class="form-title">Precios y Disponibilidad</h2>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a role="button" href="home.php" type="button" class="btn btn-secondary">Volver a Panel de Control</a>
+                        </div>
+                        <br><br>
                         <!-- <div class="form-group form-button">
                             <a href="new_product.php" class="form-submit" id="signup" role="button">Agregar Producto</a>
                         </div>

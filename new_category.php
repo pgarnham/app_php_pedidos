@@ -12,7 +12,7 @@ session_start();
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Main css -->
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -30,6 +30,10 @@ session_start();
 
                     <div class="signin-form">
                         <h2 class="form-title">Crear Categoría</h2>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a role="button" href="categories.php" type="button" class="btn btn-secondary">Volver a Categorías</a>
+                        </div>
+                        <br><br>
                         <form method="POST" class="register-form" id="login-form" action="consultas/insert_category.php">
                             <div class="form-group">
                                 <label for="categoria"><i class="zmdi zmdi-account material-icons-name"></i></label>

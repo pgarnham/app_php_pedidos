@@ -5,7 +5,7 @@
         $result -> execute();
         require("consulta_semana.php");
         echo $semana;
-        $semana_pasada = "SELECT * FROM productos_semanas WHERE productos_semanas.sem_id = ($semana - 1)";
+        $semana_pasada = "SELECT * FROM productos_semanas WHERE productos_semanas.sem_id = 2";
         $result_2 = $my_db -> prepare($semana_pasada);
         $result_2 -> execute();
         $antiguos = $result_2 -> fetchAll();

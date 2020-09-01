@@ -40,9 +40,11 @@ if (!isset($_SESSION['current_user_id'])) {
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 class="form-title">Unidades</h2>
-                        <div class="form-group form-button">
-                            <a href="new_unit.php" class="form-submit" id="signup" role="button">Crear Unidad</a>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a role="button" href="new_unit.php" type="button" class="btn btn-secondary">Crear Unidad</a>
+                            <a role="button" href="home.php" type="button" class="btn btn-secondary">Volver a Panel de Control</a>
                         </div>
+                        <br><br>
                         <table class="table">
                             <thead>
                                 <tr>

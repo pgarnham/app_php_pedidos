@@ -53,6 +53,7 @@ if (!isset($_SESSION['current_user_id'])) {
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <a role="button" href="new_product.php"  type="button" class="btn btn-secondary">Agregar Producto</a>
                             <a role="button" href="edit_precios_disp.php" type="button" class="btn btn-secondary">Editar Precios/Disponibilidad</a>
+                            <a role="button" href="home.php" type="button" class="btn btn-secondary">Volver a Panel de Control</a>
                         </div>
                         <br><br>
                         <table class="table">

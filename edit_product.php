@@ -50,6 +50,7 @@ require("connection.php");
 </head>
 <body>
 
+
     <div class="main">
 
         <!-- Sing in  Form -->
@@ -64,7 +65,10 @@ require("connection.php");
                         <?php
                             echo "<h2 class='form-title'>Editar $producto[1]</h2>";
                         ?>
-                        
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a role="button" href="products.php" type="button" class="btn btn-secondary">Volver a Productos</a>
+                        </div>
+                        <br><br>
                         <form method="POST" class="register-form" id="login-form" action="consultas/edit_product_consulta.php">
                             <div class="form-group">
                                 <label for="nombre"><i class="zmdi zmdi-cake material-icons-name"></i></label>

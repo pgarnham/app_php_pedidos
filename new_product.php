@@ -53,6 +53,10 @@ require("connection.php");
 
                     <div class="signin-form">
                         <h2 class="form-title">Agregar Producto</h2>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a role="button" href="products.php" type="button" class="btn btn-secondary">Volver a Productos</a>
+                        </div>
+                        <br><br>
                         <form method="POST" class="register-form" id="login-form" action="consultas/insert_product.php">
                             <div class="form-group">
                                 <label for="nombre"><i class="zmdi zmdi-cake material-icons-carrot"></i></label>

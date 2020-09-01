@@ -50,7 +50,10 @@ require("connection.php");
                         <?php
                             echo "<h2 class='form-title'>Editar $categoria[1]</h2>";
                         ?>
-                        
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a role="button" href="categories.php" type="button" class="btn btn-secondary">Volver a Categorías</a>
+                        </div>
+                        <br><br>
                         <form method="POST" class="register-form" id="login-form" action="consultas/edit_category_consulta.php">
                             <div class="form-group">
                                 <label for="nombre"><i class="zmdi zmdi-cake material-icons-name"></i></label>
