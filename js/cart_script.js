@@ -67,9 +67,11 @@ $(document).ready(function(){
     actual_value = parseFloat($(this).parent().children(".qt").html());
     new_value = actual_value + actual_step;
     $(this).parent().children(".qt").html(new_value);
-    input_id = "cant" + actual_pid;
-    $(input_id).val(new_value.toString());
-
+    inicio = "#cantidad_";
+    input_id = inicio.concat(toString(actual_pid));
+    input = $(this).parent().children(".mi_input");
+    input.attr('value', new_value);
+    console.log("pase por aqui");
     $(this).parent().children(".full-price").addClass("added");
     
     var el = $(this);
@@ -87,8 +89,10 @@ $(document).ready(function(){
     
     if(parseFloat(child.html()) > 0) {
       child.html(new_value);
-      input_id = "cant" + actual_pid;
-      $(input_id).val(new_value.toString());
+      inicio = "cantidad_";
+      input_id = inicio.concat(toString(actual_pid));
+      input = $(this).parent().children(".mi_input");
+      input.attr('value', new_value);
     }
     
     $(this).parent().children(".full-price").addClass("minused");
